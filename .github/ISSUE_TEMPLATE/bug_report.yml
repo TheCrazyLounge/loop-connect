@@ -1,0 +1,86 @@
+name: Bug report
+description: Something in Loop Connect Controller isn't working.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Before you start, make sure **EK-Connect is fully exited** (tray icon → Exit). Only one app can talk to the hub at a time.
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: Shown in the app header, or in Settings → Apps → Installed apps.
+      placeholder: v1.2.1
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Hub connection
+        - Fans / pump
+        - Fan curves
+        - Temperature sensors (CPU / GPU)
+        - RGB
+        - Tray / startup with Windows
+        - Installer / updates
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the app
+        2. ...
+        3. See error
+    validations:
+      required: true
+  - type: dropdown
+    id: windows
+    attributes:
+      label: Windows version
+      options:
+        - Windows 11
+        - Windows 10
+    validations:
+      required: true
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware
+      description: CPU, GPU, and what is plugged into the hub (fans, pump, RGB devices, and which ports).
+      placeholder: |
+        CPU: Ryzen 7 7800X3D
+        GPU: RTX 4080
+        Hub: fans on 1-3, pump on 4, RGB on ARGB 1
+  - type: textarea
+    id: config
+    attributes:
+      label: Config (optional)
+      description: Contents of `%LocalAppData%\EkHubController\config.json` if the problem involves curves or channels.
+      render: json
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or error messages
+      description: Drag images in, or paste any error text.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: EK-Connect was fully exited while this happened.
+          required: true
+        - label: I am on the latest release.

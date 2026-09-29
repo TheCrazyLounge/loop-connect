@@ -44,4 +44,4 @@ Use **Settings → Apps → Installed apps → Loop Connect Controller → Unins
 
 ## Support
 
-Report issues to the project maintainer. Do not expect EKWB support for this tool.
+Report bugs and request features on the [Issues](https://github.com/TheCrazyLounge/loop-connect/issues/new/choose) page. Please pick a template and fill it in. Do not expect EKWB support for this tool.

@@ -1,0 +1,50 @@
+name: Forward issues
+
+# Copies every new public issue into the private source repo so it can be
+# tracked alongside the code. Requires the PRIVATE_ISSUES_TOKEN secret: a
+# fine-grained PAT with Issues read/write on TheCrazyLounge/loop-connect-controller.
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  forward:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open issue in private repo
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PRIVATE_ISSUES_TOKEN }}
+          script: |
+            const issue = context.payload.issue;
+            const body = [
+              `Forwarded from public issue ${issue.html_url}`,
+              `Reported by ${issue.user.login}`,
+              '',
+              '---',
+              '',
+              issue.body || '_No description provided._',
+            ].join('\n');
+
+            const { data: created } = await github.rest.issues.create({
+              owner: 'TheCrazyLounge',
+              repo: 'loop-connect-controller',
+              title: issue.title,
+              body,
+              labels: [...issue.labels.map(l => l.name), 'from-public'],
+            });
+            core.info(`Created ${created.html_url}`);
+
+      - name: Label public issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.addLabels({
+              ...context.repo,
+              issue_number: context.payload.issue.number,
+              labels: ['forwarded'],
+            });

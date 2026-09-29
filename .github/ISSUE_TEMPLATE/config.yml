@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Hub not detected / "Not connected"
+    url: https://github.com/TheCrazyLounge/loop-connect#before-you-install-ek-connect
+    about: Most connection problems are EK-Connect still running. Check this first.
+  - name: EKWB support
+    url: https://www.ekwb.com/
+    about: This tool is unofficial. For hardware faults or warranty, contact EKWB.
